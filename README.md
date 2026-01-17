@@ -1,38 +1,72 @@
-# Cyrillio - SRT Subtitle Converter
+# Cyrillio - SRT Subtitle Tools
 
-A Python tool to convert Serbian Latin subtitles (.srt) to Cyrillic.
+Python tools for processing Serbian subtitle files (.srt):
+- Convert Latin script to Cyrillic
+- Translate Croatian vocabulary to Serbian
 
-## Description
+## Scripts
 
-This script automatically converts subtitle files from Latin script to Serbian Cyrillic. It processes `.srt` files located in the `original` directory and saves the converted versions to the `cyrillic` directory, maintaining the folder structure.
+### 1. Latin to Cyrillic Converter (`convert_to_cyrillic.py`)
 
-It handles:
-- Digraphs (Lj, Nj, Dž) correctly.
-- Standard Serbian Latin characters (Č, Ć, Ž, Š, Đ).
-- Automatic encoding detection for input files.
-- Organization of files into movie folders if they are in the root directory.
+Converts Serbian Latin subtitles to Cyrillic script.
 
-## Usage
+**Features:**
+- Handles digraphs (Lj, Nj, Dž) correctly
+- Supports Serbian Latin characters (Č, Ć, Ž, Š, Đ)
+- Auto-detects file encoding
+- Maintains folder structure
 
-1.  Ensure you have Python installed.
-2.  Place your Latin `.srt` files in the `original` folder. You can organize them into subfolders (e.g., by movie name) or put them directly in the root of `original`.
-3.  Run the script:
+**Usage:**
+```bash
+# Place .srt files in the original/ folder, then run:
+python convert_to_cyrillic.py
+```
 
-    ```bash
-    python convert_to_cyrillic.py
-    ```
+Converted files appear in the `cyrillic/` folder.
 
-4.  The converted files will appear in the `cyrillic` folder.
+### 2. Croatian to Serbian Translator (`translate_croatian_to_serbian.py`)
+
+Translates Croatian vocabulary to Serbian equivalents in subtitle files.
+
+**Features:**
+- 1200+ word mappings covering:
+  - Location/time adverbs (ovdje→ovde, uvijek→uvek, gdje→gde)
+  - Verb conjugations (vidjeti→videti, osjećati→osećati)
+  - Future tense patterns (bit ću→biću, Voljet će→Voleće)
+  - Common nouns (čovjek→čovek, dijete→dete, dečki→momci)
+  - Days/months (ponedjeljak→ponedeljak, siječanj→januar)
+  - Vocabulary (tisuća→hiljada, vlak→voz, glazba→muzika)
+- Auto-detects file encoding (UTF-8, CP1250, ISO-8859-2)
+- Word boundary matching to avoid partial replacements
+
+**Usage:**
+```bash
+# Translate a single file (creates file_sr.srt)
+python translate_croatian_to_serbian.py subtitle.srt
+
+# Translate text directly
+python translate_croatian_to_serbian.py -t "Što radiš?"
+
+# Translate all .srt files in a directory
+python translate_croatian_to_serbian.py -r input_folder/
+
+# Translate in place (overwrite original)
+python translate_croatian_to_serbian.py -i subtitle.srt
+
+# Specify output file
+python translate_croatian_to_serbian.py subtitle.srt -o translated.srt
+```
 
 ## Folder Structure
 
 ```
 .
-├── convert_to_cyrillic.py  # Main script
-├── original/               # Input folder for Latin subtitles
+├── convert_to_cyrillic.py           # Latin to Cyrillic converter
+├── translate_croatian_to_serbian.py # Croatian to Serbian translator
+├── original/                        # Input folder for subtitles
 │   └── Movie Name/
 │       └── subtitle.srt
-└── cyrillic/               # Output folder for Cyrillic subtitles
+└── cyrillic/                        # Output folder for Cyrillic subtitles
     └── Movie Name/
         └── subtitle.srt
 ```
