@@ -620,6 +620,15 @@ CROATIAN_TO_SERBIAN = {
     'Dečki': 'Momci',
     'Dečko': 'Momak',
     
+    # DOG/PUPPY (psić -> pas)
+    'psić': 'pas',
+    'psića': 'psa',
+    'psiću': 'psu',
+    'psićem': 'psom',
+    'psići': 'psi',
+    'Psić': 'Pas',
+    'Psići': 'Psi',
+    
     # =====================================================
     # ANGER/RAGE WORDS (bijes -> bes)
     # =====================================================
